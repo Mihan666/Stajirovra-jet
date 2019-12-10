@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.mikhalguzev'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3'
+    implementation 'io.github.bonigarcia:webdrivermanager:3.7.1'
+}
