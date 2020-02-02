@@ -25,18 +25,18 @@ public class ApplicationManager {
 
     public void init() {
 
-        if (browserType.equals(BrowserType.CHROME) ){
+        if (browserType.equals(BrowserType.CHROME)) {
             WebDriverManager.chromedriver().setup();
-            driver= new ChromeDriver();
-        }else if (browserType.equals(BrowserType.FIREFOX)){
+            driver = new ChromeDriver();
+        } else if (browserType.equals(BrowserType.FIREFOX)) {
             WebDriverManager.firefoxdriver().setup();
-            driver= new FirefoxDriver();
-        }else {
+            driver = new FirefoxDriver();
+        } else {
             WebDriverManager.chromedriver().setup();
-            driver= new ChromeDriver();
+            driver = new ChromeDriver();
         }
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        driver.get("http://localhost/addressbook/group.php");
+        driver.get("http://localhost/addressbook");
         sessionHelper = new SessionHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         groupHelper = new GroupHelper(driver);

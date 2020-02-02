@@ -2,7 +2,11 @@ package ru.guzev.stajirovka_jet.forContacts.appManagerForContacts;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.guzev.stajirovka_jet.forContacts.modelForContacts.GroupDataForContacts;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBaseForContacts {
     NavigationHelperForContacts navigationHelperForContacts;
@@ -36,8 +40,8 @@ public class ContactHelper extends HelperBaseForContacts {
         driver.switchTo().alert().accept();
     }
 
-    public void selectContact() {
-        click(By.xpath("//input[@name='selected[]']"));
+    public void selectContact(int index) {
+        driver.findElements(By.xpath("//input[@name='selected[]']")).get(index).click();
     }
 
     public void initContactModification() {
@@ -61,4 +65,21 @@ public class ContactHelper extends HelperBaseForContacts {
         return isElementPresent(By.xpath("//input[@name='selected[]']"));
     }
 
+    public int getContactCount() {
+        return driver.findElements(By.xpath("//input[@name='selected[]']")).size();
+    }
+
+    public List<GroupDataForContacts> getContactList() {
+        List<GroupDataForContacts> contacts = new ArrayList<GroupDataForContacts>();
+        List<WebElement> elements = driver.findElements(By.xpath("//tr[@class]"));//улучшить локатор
+        for (WebElement element : elements) {
+            String firstName = element.getText();
+            String lastName = element.getText();
+            String phone = element.getText();
+
+            GroupDataForContacts contact = new GroupDataForContacts(firstName, lastName, phone, null);
+            contacts.add(contact);
+        }
+        return contacts;
+    }
 }
