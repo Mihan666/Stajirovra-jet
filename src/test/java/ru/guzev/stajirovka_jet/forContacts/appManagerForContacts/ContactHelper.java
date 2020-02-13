@@ -76,8 +76,8 @@ public class ContactHelper extends HelperBaseForContacts {
             String firstName = element.getText();
             String lastName = element.getText();
             String phone = element.getText();
-
-            GroupDataForContacts contact = new GroupDataForContacts(firstName, lastName, phone, null);
+            String id = element.findElement(By.tagName("input")).getAttribute("id");
+            GroupDataForContacts contact = new GroupDataForContacts(id, firstName, lastName, phone, null);
             contacts.add(contact);
         }
         return contacts;
