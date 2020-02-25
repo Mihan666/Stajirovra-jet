@@ -54,12 +54,11 @@ public class ContactHelper extends HelperBaseForContacts {
 
     public void createContact(GroupDataForContacts contact) {
         navigationHelperForContacts.goToAddContact();
-        fillContactForm(new GroupDataForContacts("Test1", "Test2", "8666666666", null));
+        fillContactForm(contact);
         submitContactCreation();
         returnToHomePage();
 
     }
-
 
     public boolean isThereAContact() {
         return isElementPresent(By.xpath("//input[@name='selected[]']"));
@@ -73,10 +72,12 @@ public class ContactHelper extends HelperBaseForContacts {
         List<GroupDataForContacts> contacts = new ArrayList<GroupDataForContacts>();
         List<WebElement> elements = driver.findElements(By.xpath("//tr[@class]"));//улучшить локатор
         for (WebElement element : elements) {
-            String firstName = element.getText();
-            String lastName = element.getText();
-            String phone = element.getText();
-            String id = element.findElement(By.tagName("input")).getAttribute("id");
+
+            String firstName = element.findElements(By.xpath("./td")).get(2).getText();
+            String lastName = element.findElements(By.xpath("./td")).get(1).getText();
+            String phone = element.findElements(By.xpath("./td")).get(5).getText();
+
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             GroupDataForContacts contact = new GroupDataForContacts(id, firstName, lastName, phone, null);
             contacts.add(contact);
         }

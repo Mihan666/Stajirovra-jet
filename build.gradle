@@ -15,4 +15,5 @@ dependencies {
     implementation 'org.testng:testng:7.0.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3'
     implementation 'io.github.bonigarcia:webdrivermanager:3.7.1'
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.15.0'
 }
