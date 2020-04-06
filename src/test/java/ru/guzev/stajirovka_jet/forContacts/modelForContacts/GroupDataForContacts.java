@@ -18,7 +18,7 @@ public class GroupDataForContacts {
     }
 
     public GroupDataForContacts(String firstName, String lastName, String phone, String email) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -30,8 +30,7 @@ public class GroupDataForContacts {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupDataForContacts contacts = (GroupDataForContacts) o;
-        return id == contacts.id &&
-                Objects.equals(firstName, contacts.firstName) &&
+        return Objects.equals(firstName, contacts.firstName) &&
                 Objects.equals(lastName, contacts.lastName) &&
                 Objects.equals(phone, contacts.phone) &&
                 Objects.equals(email, contacts.email);
@@ -39,7 +38,7 @@ public class GroupDataForContacts {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, phone, email);
+        return Objects.hash(firstName, lastName, phone, email);
     }
 
     public void setId(int id) {

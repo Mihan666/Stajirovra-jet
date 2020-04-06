@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.guzev.stajirovka_jet.forContacts.modelForContacts.GroupDataForContacts;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBaseForContacts {
@@ -29,6 +29,9 @@ public class ContactModificationTests extends TestBaseForContacts {
 
         before.remove(before.size() - 1);
         before.add(contacts);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Comparator<? super GroupDataForContacts> byId = (q1, q2) -> Integer.compare(q1.getId(),q1.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
     }
 }

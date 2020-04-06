@@ -4,7 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.guzev.stajirovka_jet.forContacts.modelForContacts.GroupDataForContacts;
 
-import java.util.HashSet;
+
+import java.util.Comparator;
+
 import java.util.List;
 
 public class ContactCreationTests extends TestBaseForContacts {
@@ -17,16 +19,11 @@ public class ContactCreationTests extends TestBaseForContacts {
         List<GroupDataForContacts> after = appForContacts.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
 
-        int max = 0;
-        for (GroupDataForContacts g : after) {
-            if (g.getId() > max) {
-                max = g.getId();
-            }
-        }
-        contact.setId(max);
         before.add(contact);
-
-        Assert.assertEquals(new HashSet<>(after), new HashSet<>(before));
+        Comparator<? super GroupDataForContacts> byId = (q1, q2) -> Integer.compare(q1.getId(),q1.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
 //        AssertJ сравнение Set`ов без учета порядка элементов
 //        Assertions.assertThat(new HashSet<>(after))
 //                .containsExactlyInAnyOrderElementsOf(new HashSet<>(before));
