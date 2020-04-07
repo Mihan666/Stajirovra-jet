@@ -37,7 +37,7 @@ public class ContactHelper extends HelperBaseForContacts {
 
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@value='Delete']"));
-        driver.switchTo().alert().accept();
+        driver.switchTo().alert().accept(); //кликает на всплывающее окно подтверждения действия
     }
 
     public void selectContact(int index) {
@@ -58,6 +58,14 @@ public class ContactHelper extends HelperBaseForContacts {
         submitContactCreation();
         returnToHomePage();
 
+    }
+
+    public void modifyContact(int index, GroupDataForContacts contacts) {
+        selectContact(index);
+        initContactModification();
+        fillContactForm(contacts);
+        submitContactModification();
+        returnToHomePage();
     }
 
     public boolean isThereAContact() {
