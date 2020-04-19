@@ -13,10 +13,10 @@ public class ContactCreationTests extends TestBaseForContacts {
 
     @Test
     public void testContactCreation() {
-        List<GroupDataForContacts> before = appForContacts.getContactHelper().getContactList();
-        GroupDataForContacts contact = new GroupDataForContacts("FirstName1", "LastName2", "8666666666", null);
-        appForContacts.getContactHelper().createContact(contact);
-        List<GroupDataForContacts> after = appForContacts.getContactHelper().getContactList();
+        List<GroupDataForContacts> before = appForContacts.contact().list();
+        GroupDataForContacts contact = new GroupDataForContacts().withFirstName("FirstName1").withLastName("LastName2").withPhone("8666666666");
+        appForContacts.contact().create(contact);
+        List<GroupDataForContacts> after = appForContacts.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(contact);

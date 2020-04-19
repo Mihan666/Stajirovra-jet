@@ -60,11 +60,11 @@ public class ApplicationManagerForContacts {
     }
 
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 
-    public NavigationHelperForContacts getNavigationHelperForContacts() {
+    public NavigationHelperForContacts goTo() {
         return navigationHelperForContacts;
     }
 }

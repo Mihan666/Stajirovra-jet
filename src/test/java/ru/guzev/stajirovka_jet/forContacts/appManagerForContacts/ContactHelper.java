@@ -52,15 +52,20 @@ public class ContactHelper extends HelperBaseForContacts {
         click(By.name("update"));
     }
 
-    public void createContact(GroupDataForContacts contact) {
-        navigationHelperForContacts.goToAddContact();
+    public void create(GroupDataForContacts contact) {
+        navigationHelperForContacts.addContact();
         fillContactForm(contact);
         submitContactCreation();
         returnToHomePage();
 
     }
 
-    public void modifyContact(int index, GroupDataForContacts contacts) {
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContacts();
+    }
+
+    public void modify(int index, GroupDataForContacts contacts) {
         selectContact(index);
         initContactModification();
         fillContactForm(contacts);
@@ -76,7 +81,7 @@ public class ContactHelper extends HelperBaseForContacts {
         return driver.findElements(By.xpath("//input[@name='selected[]']")).size();
     }
 
-    public List<GroupDataForContacts> getContactList() {
+    public List<GroupDataForContacts> list() {
         List<GroupDataForContacts> contacts = new ArrayList<GroupDataForContacts>();
         List<WebElement> elements = driver.findElements(By.xpath("//tr[@class]"));//улучшить локатор
         for (WebElement element : elements) {
@@ -86,8 +91,7 @@ public class ContactHelper extends HelperBaseForContacts {
             String phone = element.findElements(By.xpath("./td")).get(5).getText();
 
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            GroupDataForContacts contact = new GroupDataForContacts(id, firstName, lastName, phone, null);
-            contacts.add(contact);
+            contacts.add(new GroupDataForContacts().withId(id).withFirstName(firstName).withLastName(lastName).withPhone(phone));
         }
         return contacts;
     }
